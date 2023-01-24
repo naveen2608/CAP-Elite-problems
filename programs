@@ -1,0 +1,44 @@
+4sum program in java
+
+
+import java.io.*;
+import java.util.*;
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> ans = new ArrayList<>();
+        int n = nums.length;
+        if (n == 0 || nums == null) return ans;
+        Arrays.sort(nums);
+        long average_value = target / 4;
+        if (nums[0] > average_value) return ans;
+        
+        for (int i = 0; i < n - 3; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+            for (int j = i + 1; j < n - 2; j++) {
+                if (j > i + 1 && nums[j] == nums[j - 1]) continue;
+                int left = j + 1, right = n - 1;
+                while (left < right) {
+                    int sum = nums[i] + nums[j] + nums[left] + nums[right];
+                    if (sum == target) {
+                        ans.add(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));
+                        left++;
+                        right--;
+                        while (left < right && nums[left - 1] == nums[left]) {
+                            left++;
+                        }
+                        while (left < right && nums[right + 1] == nums[right]) {
+                            right--;
+                        }
+                    }
+                    else if (sum > target) {
+                        right--;
+                    } else {
+                        left++;
+                    }
+                }
+            }
+        }
+        return ans;
+        
+    }
+}
