@@ -13,15 +13,23 @@ import static java.util.stream.Collectors.toList;
 class Result {
 
     /*
-     * Complete the 'flippingBits' function below.
+     * Complete the 'diagonalDifference' function below.
      *
-     * The function is expected to return a LONG_INTEGER.
-     * The function accepts LONG_INTEGER n as parameter.
+     * The function is expected to return an INTEGER.
+     * The function accepts 2D_INTEGER_ARRAY arr as parameter.
      */
 
-    public static long flippingBits(long n) {
+    public static int diagonalDifference(List<List<Integer>> arr) {
     // Write your code here
-    return (long)Math.pow(2,32)-1-n;
+    int l=arr.size();
+    int d1=0;
+    int d2=0;
+    for(int i=0;i<l;i++)
+    {
+        d1+=arr.get(i).get(i);
+        d2+=arr.get(i).get(l-i-1);
+    }
+    return Math.abs(d1-d2);
     
 
     }
@@ -33,20 +41,26 @@ public class Solution {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
-        int q = Integer.parseInt(bufferedReader.readLine().trim());
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
 
-        IntStream.range(0, q).forEach(qItr -> {
+        List<List<Integer>> arr = new ArrayList<>();
+
+        IntStream.range(0, n).forEach(i -> {
             try {
-                long n = Long.parseLong(bufferedReader.readLine().trim());
-
-                long result = Result.flippingBits(n);
-
-                bufferedWriter.write(String.valueOf(result));
-                bufferedWriter.newLine();
+                arr.add(
+                    Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
+                        .map(Integer::parseInt)
+                        .collect(toList())
+                );
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
+
+        int result = Result.diagonalDifference(arr);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
 
         bufferedReader.close();
         bufferedWriter.close();
