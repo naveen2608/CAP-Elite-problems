@@ -1,0 +1,90 @@
+import java.io.*;
+import java.util.*;
+class student
+{
+    private String Name;
+    private int RollNo;
+    private int Year;
+    private String  Branch;
+    private ArrayList<Integer> marks=new ArrayList<Integer>();
+    public String getname()
+    {
+        return Name;
+    }
+    public int  getrollno()
+    {
+        return RollNo;
+    }
+    public String getbranch()
+    {
+        return Branch;
+    }
+    public int getyear()
+    {
+        return Year;
+    }
+    public student(String name,int rollno,String branch,int year )
+    {
+        this.Name=name;
+        this.RollNo=rollno;
+        this.Year=year;
+        this.Branch=branch;
+    }
+    public void setmarks(int a)
+    {
+        this.marks.add(a);
+    }
+    public String display()
+    {
+        return RollNo+" "+Name+" "+Branch+" "+Year;
+    }
+    public double computePercentage()
+    {
+        double sum=0;
+        for(int i=0;i<marks.size();i++)
+        {
+            sum=sum+marks.get(i);
+        }
+        double avg=sum/marks.size();
+        
+        return avg;
+    }
+    
+}
+
+public class Solution {
+    
+    public static void main(String[] args) 
+    {
+        Scanner sc=new Scanner(System.in);
+        
+        int n=Integer.parseInt(sc.nextLine());
+        for(int i=0;i<n;i++)
+        {
+            String []str=sc.nextLine().split(" ");
+            String [] nums=sc.nextLine().split(" ");
+            
+            student obj=new student(str[0],Integer.parseInt(str[1]),str[2],Integer.parseInt(str[3]));
+            for(int j = 0;j<nums.length;j++)
+            {
+               obj.setmarks(Integer.parseInt(nums[j]));
+            }
+            System.out.println(obj.display());
+            System.out.printf("%d %.2f\n",obj.getrollno(),obj.computePercentage());
+            
+      
+            
+            
+            
+            
+        }
+    
+                System.out.println("NoOfStudents="+n);
+
+    
+    
+    
+    
+    
+    }
+}
