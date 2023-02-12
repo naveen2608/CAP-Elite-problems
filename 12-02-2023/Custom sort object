@@ -1,0 +1,49 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+class Candidate implements Comparable<Candidate>
+{
+    private String name;
+    private int marks;
+    
+    public String getName()
+    {
+        return this.name;
+    }
+    public int getMark()
+    {
+        return this.marks;
+    }
+    public Candidate(String name,int marks)
+    {
+        this.name=name;
+        this.marks=marks;
+    }
+    public int compareTo(Candidate candidate)
+    {
+        return this.marks-candidate.getMark();
+    }
+
+}
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        List<Candidate>  students = new ArrayList<Candidate>();
+        for(int i=0;i<n;i++){
+           String name = in.next();
+           int marks = in.nextInt();
+           students.add(new Candidate(name,marks));
+        }
+        Collections.sort(students);
+        for(Candidate student : students){
+            System.out.println(student.getName()+" "+student.getMark());
+        }
+    }
+}
