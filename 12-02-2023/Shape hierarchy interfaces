@@ -1,0 +1,100 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+interface Shape
+{
+    double pi=22.0/7;
+    double area();
+    double perimeter();
+}
+class Rectangle implements Shape
+{
+    int l;
+    int b;
+    Rectangle(int l,int b)
+    {
+        this.l=l;
+        this.b=b;
+    }
+    public double area()
+    {
+        return l*b;
+    }
+    public double perimeter()
+    {
+        return 2*(l+b);
+    }
+    
+
+}
+class Square implements Shape
+{
+    int s;
+    Square(int s)
+    {
+        this.s=s;
+    }
+    public double area()
+    {
+        return this.s*this.s;
+    }
+    public double perimeter()
+    {
+        return 4*this.s;
+    }
+
+}
+class Circle implements Shape
+{
+    int r;
+    Circle(int r)
+    {
+        this.r=r;
+    }
+    public double area()
+    {
+        return pi*r*r;
+    }
+    public double perimeter()
+    {
+        return 2*pi*r;
+    }
+
+}
+
+public class Solution {
+
+    static void computeParams(Shape a)
+    {
+        System.out.printf("%.2f %.2f\n",a.area(),a.perimeter());
+    }
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. 
+        */
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        for(int i=0;i<=n;i++)
+        {
+            String[] str=sc.nextLine().split(" ");
+            switch(str[0])
+            {
+                case "R":
+                    Rectangle obj=new Rectangle(Integer.parseInt(str[1]),Integer.parseInt(str[2]));
+                    computeParams(obj);
+                    break;
+                case "S":
+                    Square obj1=new Square(Integer.parseInt(str[1]));
+                    computeParams(obj1);
+                    break;
+                case "C":
+                    Circle obj2=new Circle(Integer.parseInt(str[1]));
+                    computeParams(obj2);
+                    break;
+            }
+        }
+    }
+}
