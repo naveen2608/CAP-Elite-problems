@@ -1,0 +1,71 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+class Result {
+
+    /*
+     * Complete the 'gridChallenge' function below.
+     *
+     * The function is expected to return a STRING.
+     * The function accepts STRING_ARRAY grid as parameter.
+     */
+
+    public static String gridChallenge(List<String> grid) {
+    // Write your code here
+    for(int i=0;i<grid.size();i++)
+    {
+        char[] ch=grid.get(i).toCharArray();
+        Arrays.sort(ch);
+        String s=new String(ch);
+        grid.set(i,s);
+    }
+    for(int i=0;i<grid.size()-1;i++)
+    {
+        for(int j=0;j<grid.get(i).length();j++)
+        {
+            String s1=grid.get(i);
+            String s2=grid.get(i+1);
+            if(s1.charAt(j)>s2.charAt(j))
+            {
+                return "NO";
+            }
+        }
+    }
+    return "YES";
+
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int t = Integer.parseInt(bufferedReader.readLine().trim());
+
+        for (int tItr = 0; tItr < t; tItr++) {
+            int n = Integer.parseInt(bufferedReader.readLine().trim());
+
+            List<String> grid = new ArrayList<>();
+
+            for (int i = 0; i < n; i++) {
+                String gridItem = bufferedReader.readLine();
+                grid.add(gridItem);
+            }
+
+            String result = Result.gridChallenge(grid);
+
+            bufferedWriter.write(result);
+            bufferedWriter.newLine();
+        }
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
