@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        String s=sc.nextLine();
+        int k=sc.nextInt();
+        HashMap<Character,Integer> h=new HashMap<>();
+        for(int i=0;i<s.length();i++)
+        {
+            if(h.containsKey(s.charAt(i)))
+            {
+                h.put(s.charAt(i),h.get(s.charAt(i))+1);
+            }
+            else{
+                h.put(s.charAt(i),1);
+            }
+        }
+        char temp='#';
+        for(int i=0;i<s.length();i++)
+        {
+            if(h.get(s.charAt(i))==1)
+            {
+                k--;
+                if(k==0)
+                {
+                    temp=s.charAt(i);
+                }
+            }
+        }
+        if(temp=='#')
+        {
+            System.out.print(-1);
+        }
+        else
+        {
+            System.out.print(temp);
+        }
+    }
+}
