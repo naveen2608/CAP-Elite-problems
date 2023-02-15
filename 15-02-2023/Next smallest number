@@ -1,0 +1,45 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    
+    public static boolean palin(long n)
+    {
+        long m=n;
+        long s=0;
+        while(n>0)
+        {
+            long r=n%10;
+            s=s*10+r;
+            n=n/10;
+        }
+        if(s==m)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        long n=sc.nextLong();
+        n=n+1;
+        while(true)
+        {
+            if(palin(n))
+            {
+                System.out.println(n);
+                break;
+            }
+            else
+            {
+                n+=1;
+            }
+        }
+        
+    }
+}
